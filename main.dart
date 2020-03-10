@@ -10,9 +10,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       title: 'Name Creators',
+      theme: ThemeData(
+        primaryColor: Colors.white,
+      ),
       home: RandomWords(),
     );
   }
@@ -94,6 +96,7 @@ class RandomWordsState extends State<RandomWords> {
             appBar: AppBar(
               title: Text('Saved Suggestions'),
             ),
+            backgroundColor: Colors.lightBlueAccent,
             body: ListView(children: divided),
           );
         },
