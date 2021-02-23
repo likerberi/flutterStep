@@ -1,6 +1,7 @@
 import 'package:amplify/login_page.dart';
 import 'package:flutter/material.dart';
 import 'login_page.dart';
+import 'sign_up_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,6 +26,7 @@ class _MyAppState extends State<MyApp> {
         home: Navigator(
           pages: [
             MaterialPage(child: LoginPage()),
+            MaterialPage(child: SignUpPage()),
           ],
           onPopPage: (route, result) => route.didPop(result),
         ));
