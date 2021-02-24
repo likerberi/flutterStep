@@ -1,5 +1,6 @@
 import 'package:amplify/auth_service.dart';
 import 'package:amplify/login_page.dart';
+import 'package:amplify/verification_page.dart';
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'sign_up_page.dart';
@@ -39,12 +40,23 @@ class _MyAppState extends State<MyApp> {
               return Navigator(
                 pages: [
                   if (snapshot.data.authFlowStatus == AuthFlowStatus.login)
-                    MaterialPage(child: LoginPage()),
+                    MaterialPage(
+                        child: LoginPage(
+                      didProvideCredentials: _authService.loginWithCredentials,
+                      shouldShowSignUp: _authService.showSignUp,
+                    )),
                   //else?
                   if (snapshot.data.authFlowStatus == AuthFlowStatus.signUp)
                     MaterialPage(
                         child: SignUpPage(
+                      didProvideCredentials: _authService.signUpWithCredentials,
                       shouldShowLogin: _authService.showLogin,
+                    )),
+                  if (snapshot.data.authFlowStatus ==
+                      AuthFlowStatus.verification)
+                    MaterialPage(
+                        child: VerificationPage(
+                      didProvideVerificationCode: _authService.verifyCode,
                     ))
                 ],
                 onPopPage: (route, result) => route.didPop(result),

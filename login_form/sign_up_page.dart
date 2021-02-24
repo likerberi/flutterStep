@@ -1,8 +1,11 @@
+import 'package:amplify/auth_credentials.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
+  final ValueChanged<SignUpCredentials> didProvideCredentials;
   final VoidCallback shouldShowLogin;
-  SignUpPage({Key key, this.shouldShowLogin}) : super(key: key);
+  SignUpPage({Key key, this.didProvideCredentials, this.shouldShowLogin})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -72,5 +75,9 @@ class _SignUpPage extends State<SignUpPage> {
     print('username: $username');
     print('email: $emailbox');
     print('password: $password');
+
+    final credentials = SignUpCredentials(
+        username: username, email: emailbox, password: password);
+    widget.didProvideCredentials(credentials);
   }
 }
