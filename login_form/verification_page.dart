@@ -35,11 +35,10 @@ class _VerificationPageState extends State<VerificationPage> {
               icon: Icon(Icons.confirmation_number),
               labelText: 'Verification code'),
         ),
-        FlatButton(
-          onPressed: _verify,
-          child: Text('Verify'),
-          color: Theme.of(context).accentColor,
-        )
+        TextButton(
+            onPressed: _verify,
+            child: Text('Verify'),
+            style: TextButton.styleFrom(onSurface: Colors.deepPurple))
       ],
     );
   }

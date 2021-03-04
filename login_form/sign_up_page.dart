@@ -1,5 +1,6 @@
 import 'package:amplify/auth_credentials.dart';
 import 'package:flutter/material.dart';
+import 'test_page.dart';
 
 class SignUpPage extends StatefulWidget {
   final ValueChanged<SignUpCredentials> didProvideCredentials;
@@ -21,6 +22,7 @@ class _SignUpPage extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(centerTitle: true, title: Text('Signup_Page')),
       body: SafeArea(
           minimum: EdgeInsets.symmetric(horizontal: 40),
           child: Stack(
@@ -28,9 +30,18 @@ class _SignUpPage extends State<SignUpPage> {
               _signUpForm(),
               Container(
                 alignment: Alignment.bottomCenter,
-                child: FlatButton(
+                child: TextButton(
                     onPressed: widget.shouldShowLogin,
                     child: Text('Already have an account? Then login')),
+              ),
+              Container(
+                alignment: Alignment.topCenter,
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => TestPage()));
+                    },
+                    child: Text('TestButton')),
               )
             ],
           )),

@@ -19,20 +19,21 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(centerTitle: true, title: Text('Login_Page')),
         body: SafeArea(
-      minimum: EdgeInsets.symmetric(horizontal: 40),
-      child: Stack(
-        children: [
-          _loginForm(),
-          Container(
-            alignment: Alignment.bottomCenter,
-            child: FlatButton(
-                onPressed: widget.shouldShowSignUp,
-                child: Text('Don\'t have an account? Sign up.')),
-          )
-        ],
-      ),
-    ));
+          minimum: EdgeInsets.symmetric(horizontal: 40),
+          child: Stack(
+            children: [
+              _loginForm(),
+              Container(
+                alignment: Alignment.bottomCenter,
+                child: TextButton(
+                    onPressed: widget.shouldShowSignUp,
+                    child: Text('Don\'t have an account? Sign up.')),
+              )
+            ],
+          ),
+        ));
   }
 
   Widget _loginForm() {
@@ -51,10 +52,10 @@ class _LoginPageState extends State<LoginPage> {
           obscureText: true,
           keyboardType: TextInputType.visiblePassword,
         ),
-        FlatButton(
+        TextButton(
           onPressed: _login,
           child: Text('Login'),
-          color: Theme.of(context).accentColor,
+          style: TextButton.styleFrom(backgroundColor: Colors.transparent),
         )
       ],
     );
