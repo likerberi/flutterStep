@@ -14,14 +14,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
+      home: MyHomePage(), // 1
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState(); // 2
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -29,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Material(
         child: Stack(children: <Widget>[
-      Scaffold(body: TestPage()),
+      Scaffold(body: TestPage()), // 3
       IgnorePointer(
           child: AnimationScreen(color: Theme.of(context).accentColor))
     ]));
