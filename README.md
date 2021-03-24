@@ -1,9 +1,9 @@
-# myapp
+# Flutter, Step by Step.
 
-A new Flutter project.
+Composite Project for SE from Novice to Intermediate.
 
 ## Getting Started
-
+(flutter.dev)
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
