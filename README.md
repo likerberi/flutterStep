@@ -16,5 +16,5 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-M1 Mac, this platform has not full compatibilty yet.
+M1 Mac, this platform has not full compatible yet.
 (Some issues will be covered by re-boot or rebuild.)
