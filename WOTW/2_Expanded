@@ -1,0 +1,6 @@
+#2 Expanded
+고정적인 것들이 제일 먼저 배치.
+그리고 나머지가 Flex 위젯들 (Expanded, Flexible)
+안드로이드의 weight처럼 flex를 조절할 수 있음. 
+
+플렉서블과의 차이점은, 플렉서블은 parent가 기준. 
