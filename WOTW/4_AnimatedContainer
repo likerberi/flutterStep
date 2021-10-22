@@ -1,0 +1,7 @@
+AnimatedContainer  
+말 그대로 컨테이너에 애니메이션 효과를 주는 것입니다.  
+플러터는 explicit animations 즉 명시적인 애니메이션을 지원하고  
+동시에 묵시적 implicit인 애니메이션도 지원하죠.  
+
+애니메이션을 선언하고 세팅할 때, 이후 setState()에서 변경할 때 Interpolation, 보간을 통해서 보정도 해 줍니다.  
+이외에도 borders / border radii / shadows.. duration / curve 등을 활용하면 다양한 애니메이션을 활용할 수 있습니다.  
