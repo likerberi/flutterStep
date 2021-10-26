@@ -1,0 +1,9 @@
+FutureBuilder  
+  
+다트도 기본적으로 비동기 프로그래밍입니다. async와 await 등을 활용하곤 하죠.  
+위젯에서의 Future는 어떻게할까요? => FutureBuilder.  
+future: 와 builder: (context, snapshot)으로 조정.  
+그리고 스냅샷의 연결 상태ConnectionState에 따라서 if문으로 분기 혹은 switch문으로 분기할 수 있습니다.  
+연결 상태는 네 가지로 구분되는데, none, waiting, active 그리고 done이 그것이죠.  
+none에는 보통 에러 문구를 출력하도록 하며, waiting에는 CircularProgressIndicator를 담아놓습니다.  
+  
