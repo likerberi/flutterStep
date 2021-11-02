@@ -1,0 +1,6 @@
+FadeTransition  
+애니메이션을 조금 더 간단하게 구현할 수 있도록.  
+FadeTransition,  
+AnimationController controller  
+Tween(begin:, end:,).animate(controller)  
+controller.forward()를 통해서 구현.  
