@@ -1,0 +1,8 @@
+PageView with PageController  
+  
+주로 튜토리얼이나 업그레이드 안내사항 등을 표현할 때.  
+요즘 새로운 방식의 쇼핑앱들이 채택하고 있는 방법이기도 하죠.  
+  
+컨트롤러를 물려준 뒤 children에 페이지들을 나열하면 됩니다.  
+scrollDirection으로 가로/세로를 조절하구요.  
+  
