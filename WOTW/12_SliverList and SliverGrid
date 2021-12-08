@@ -1,0 +1,8 @@
+Sliver : 스크롤 할수 있는 영역입니다  
+SliverList 혹은 Grid를 만든다 = CustomScrollView 하위를 만든다.  
+delegate - 위임/대리 항목이 필수, 마치 children(child)를 제공Supply하는 것과 비슷.  
+A delegate that supplies children for slivers using a builder callback. 이라는 원문도 있네요 (SliverChildBuilderDelegate)  
+  
+SliverChildListDelegate()에는 []로 구현할 수 있으며 ([]) 위의 Builder를 통해서는 context와 index를 사용합니다.  
+SliverGrid는 GridView처럼 .count로 crossAxisCount를 명시할 수 있습니다. (이때 하위는 children)  
+혹은 Extent의 float/double 값으로 조정하기도 합니다.  
