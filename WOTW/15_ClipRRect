@@ -1,0 +1,5 @@
+ClipRRect.  
+Radius 조정  
+Core of the Theme,  
+직접 곡선 값을 조정해서 바꿀 수도 있지만, 모를 땐 Material Theme을 쓰는 게 낫다  
+clipBehavior ~ oval ~ Path 등으로 조정하기도 한다  
