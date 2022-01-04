@@ -1,0 +1,11 @@
+Hero는 스크린 사이의 애니메이션 처리의 일환.  
+tag 달아서 route를 겸한다고도 볼 수 있습니다.  
+(포토)히어로 -> OnTap -> Navigator_PUSH -> (Again) 히어로 -> OnTap -> Navigator_POP  
+모든 페이지에 똑같이 구현해서 사용합니다.  
+  
+문서에서는 radical과 standard로 나뉘어서 설명하고 있는데,  
+래디컬의 예로는, 가시적인 위젯의 모형이 바뀔 때 : 원 => 네모 ...  
+스탠다드의 예시는 아니지만, 사진을 활용한 히어로 예제의 하이라키는 다음과 같습니다.  
+(from flutter.dev)  
+SizedBox > Hero > Material > InkWell > Image  
+  
