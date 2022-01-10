@@ -1,0 +1,10 @@
+CustomPaint.  
+  
+Low level - approach. 
+  
+Size & painter. 
+  
+Extends CustomPainter,  
+Paint,  
+Canvas, line, rect, path, image, paragraph.    
+shouldRepaint ~ rebuild. 
