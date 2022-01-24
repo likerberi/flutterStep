@@ -1,0 +1,6 @@
+FittedBox  
+scale, fit automatically  
+Constraints go down. Sizes go up. Parent sets position.  
+제약사항은 밑으로 내려가면서 결정되고,  
+사이즈는 위로 올라가면서 결정된다는 뜻입니다.  
+플러터 위젯의 기본적인 개념이며, fittedbox역시 해당됩니다.  
