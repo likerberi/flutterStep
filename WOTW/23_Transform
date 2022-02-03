@@ -1,0 +1,15 @@
+#23 트랜스폼  
+:: 플러터는 자체적으로 렌더링을 한다  
+transform.rotate ~ angle + child   
+transform.scale ~ scale + child  
+transform.translate ~ offset + child  
+Matrix4.skewX  
+skew: 왜곡하다 / 비스듬히 움직이다   
+3D perspective with animation  
+Transform(  
+	transform: Matrix4.identity(  
+		..setEntry(3, 2, 0.01)  
+		..rotateX(0.6),  
+		alignment: FractionalOffset  
+	)  
+)  
