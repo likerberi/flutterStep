@@ -1,0 +1,8 @@
+How to Image-Support such as rotation, angle and blur?  
+  
+With BackdropFilter
+filter: ImageFilter()  
+and child  
+
+When you adopt background,  
+plz use Stack and Positioned.Fill  
