@@ -1,0 +1,15 @@
+when we make DB,  
+copyWith  
+toString  
+toJson  
+fromJson  
+==  
+
+.....
+freezed is sort of AUTO_GENERATOR  
+pubspec -> freezed_annotation, build_runner and freezed.  
+_$CLASS()  
+part 'class.g.dart';  
+part 'class.freezed.dart';  
+  
+and build with build_runner  
