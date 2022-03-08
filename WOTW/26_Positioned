@@ -1,0 +1,8 @@
+26 Positioned  
+  
+Stack의 위치를 지정.  
+top, bottom 및 높이, 너비 지정.  
+
+https://docs.flutter.dev/testing/common-errors  
+to prevent '‘Incorrect use of ParentData widget’'  
+Stack should be the parent Widget of Positioned.  
