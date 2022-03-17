@@ -1,0 +1,6 @@
+with Permission,  
+1.serviceEnabled  
+2.hasPermission  
+  
+lat/lng/alt/time... etc  
+https://pub.dev/packages/location  
