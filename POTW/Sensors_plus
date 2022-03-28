@@ -1,0 +1,4 @@
+sensors_plus  
+A Flutter plugin to access the accelerometer, gyroscope, and magnetometer sensors.  
+acc sensor like pedometer  
+gyro sensor for level-meter  
