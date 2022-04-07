@@ -1,0 +1,7 @@
+async  
+StreamGroup :: merging streams    
+StreamQueue :: async waiting list  
+StreamQueue(myStream).next / .next  
+  
+* This is not same as 'dart:async'.  
+* It just 'package:async/async.dart';  
