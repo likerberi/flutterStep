@@ -1,0 +1,5 @@
+Inherited Widget  
+class의 보일러플레이트 방지.   
+of. 자식 위젯 엑세스 규칙   
+valueNotifier  
+changeNotifier  
