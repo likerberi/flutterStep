@@ -1,0 +1,11 @@
+get_it  
+플러터의 모든 것이 위젯인 것은 아니다.  
+runApp - 최상단 이전에 선언  
+ex. GetIt.I.registerSingleton<MyDatabase>()  
+이후 불러옴  
+final MyDatabase db = GetIt.I.get<MyDatabase>();  
+  
+lazy의 경우에는 registerFactory<>를 통해서, 회수는 같은 방식  
+  
+global locator라서 전역에서 사용 가능  
+context 없이도 사용 가능  
