@@ -1,0 +1,10 @@
+Text('Text is blah blah', style: GoogleFonts.lobster())  
+all change :: TextTheme.    
+  
+for MacOS,  
+<key>com.apple.security.network.client</key>  
+<true/>  
+  
+글꼴 파일을 굳이 왜 앱애셋으로 저장할까?   
+=> not to call http 통신.  
+GoogleFonts.config.allowRuntimeFetching = false;  
