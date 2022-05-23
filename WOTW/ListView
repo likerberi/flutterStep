@@ -1,0 +1,6 @@
+cacheExtend  
+화면에 렌더/뷰가 되지 않은 상태에서도 해당 값의 픽셀만큼 미리 빌드  
+  
+seperatorBuilder  
+  
+custom은 childrenDelegate ~ mySliverChildDelegate  
