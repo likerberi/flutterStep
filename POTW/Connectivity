@@ -1,0 +1,5 @@
+Connectivity().checkConnectivity  
+ConnectivityResult.wifi/ mobile/ none/  
+  
+StreamSubscription<ConnectivityResult>  
+.listen(_updateConnectionStatus)  
