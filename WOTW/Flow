@@ -1,0 +1,5 @@
+To orchestrate.   
+Children => paintChildren()  
+0 == index, matrix.identity (no change).  
+  
+Ex. Button(FAB) flow to clk and popup.   
