@@ -1,0 +1,10 @@
+path_provider  
+  
+mass ~ getApplicationDocumentsDirectory()  
+manifesto etc ~ getApplicationSupportDirectory()   
+transient(temporary) ~ getTemporaryDirectory()  
+  
+it depends on OS,   
+please check official site,  
+https://pub.dev/packages/path_provider  
+  
