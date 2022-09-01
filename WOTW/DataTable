@@ -1,0 +1,7 @@
+DataTable  
+columns -> DataColumn  
+rows -> DataRow -> cells -> DataCell   
+  
+data-filtering, sorting.  
+  
+Every-Cell is Widget.  
