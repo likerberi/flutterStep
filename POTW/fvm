@@ -1,0 +1,12 @@
+flutter version management  
+
+fvm use 2.0.6  
+.fvm  
+fvm_config.json  
+.gitignore  
+
+dart.flutterSdkPath  
+  
+fvm flutter run  
+  
+https://fvm.app/docs/getting_started/overview  
