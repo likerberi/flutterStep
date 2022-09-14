@@ -1,0 +1,9 @@
+Linear gradient  
+like PPT color - adjust  
+colors: []  
+stops:[0.0~1]  
+begin / end  
+transform  
+  
+ShaderMask for text.   
+ShaderMask( shaderCallback:, child:)  
