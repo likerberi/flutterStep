@@ -1,0 +1,11 @@
+authcomplete  
+<string>  
+optionBuilder  
+return myObjects.filter(  
+	(obj) => obj.name.contains(textEditingValue.text,),  
+)  
+displayStringForOption  
+optionsViewBuilder  
+onSelected  
+  
+custom: fieldViewBuilder  
