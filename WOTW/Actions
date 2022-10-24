@@ -1,0 +1,5 @@
+Actions()  
+actions: <Type, ACtion<Intent>>{},   
+or  
+actionsMap{  
+}  
