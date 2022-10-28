@@ -1,0 +1,4 @@
+Slider, RangeSlider,  
+divisions  
+labeling ~ RangeLabels.   
+adaptive ~ material & cupertino  
