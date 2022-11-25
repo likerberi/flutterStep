@@ -1,0 +1,3 @@
+Flutter code generator for your assets, fonts, colors  
+assets/images/icons/paint.svg     => Assets.images.icons.paint  
+colors, fonts also  
