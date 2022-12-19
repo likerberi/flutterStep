@@ -1,0 +1,10 @@
+flutter_web  
+flutter config —enable-web  
+flutter create .  
+flutter run -d chrome  
+<script>  
+	engineInitializer.initializeEngine();  
+	appRunner.runApp();  
+</script>  
+  
+flutter_web_plugins/url_strategy  
