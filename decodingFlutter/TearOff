@@ -1,0 +1,5 @@
+Tear-Offs
+ex, onPressed: myMethod, not (){ myMethod() }   
+람다 (){},  
+stls vs. stf  
+wasteful or not.  
