@@ -1,0 +1,8 @@
+for rendering recursive Widgets,   
+cuz setState(){} ~ build(),  
+context mis-application.  
+1_ helper method,   
+inner method in the same class  
+2_ new class   
+  
+2_ is recommended.   
