@@ -1,5 +1,7 @@
 dart:io.Platform  
-Adaptive, iOS, Android, Web etc  
-Theme.of(context).platform  
-Responsive, MediaQuery  
+Adaptive, iOS, Android, Web etc
   
+Theme.of(context).platform  
+Responsive, 
+MediaQuery  
+LayoutBuilder  
