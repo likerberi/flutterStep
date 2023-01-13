@@ -1,0 +1,2 @@
+font, generic, static, init() != hot reload  
+and Flutter web(not supported)  
