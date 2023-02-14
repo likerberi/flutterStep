@@ -1,7 +1,7 @@
 UI friendly programming <-> debug  
 FlutterDevTool  
-Widget Detail Tree  
+widget tree, detail tree,  
  _widget  
 debugFillProperties  
-Inspector  
-GPU사용률 / 메모리 사용률 모니터링   
+inspector, performance, CPU profile, memory, network, debugging, logging, app size etc  
+
