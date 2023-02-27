@@ -6,3 +6,14 @@ Element Tree
 Render Tree  
 Widget Tree  
  
+-R.O-
+User Input
+Animation
+Build
+
++LayerTree
+<Rendering>
+Layout
+Paint
+Compositing
+Rasterize
