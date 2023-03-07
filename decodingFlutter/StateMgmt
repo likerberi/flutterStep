@@ -1,0 +1,4 @@
+Simple:: ChangeNotifier() ~ notifyListeners();  
+setState({});  
+
+Complex:: libraries like BloC, riverpod etc..  
