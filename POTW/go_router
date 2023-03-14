@@ -1,0 +1,6 @@
+Navi,  
+deepLink,  
+and info like  
+builder: (context, state) => YourClass(params: state.params[‘’paramId]);  
+  
+shellRoute for part(like bottomNavi)  
