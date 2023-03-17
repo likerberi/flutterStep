@@ -1,0 +1,11 @@
+EasyDebounce.debounce(  
+    'my-debouncer',                 // <-- An ID for this particular debouncer  
+    Duration(milliseconds: 500),    // <-- The debounce duration  
+    () => myMethod()                // <-- The target method  
+);  
+EasyDebounce.cancel('my-debouncer');  
+EasyDebounce.cancelAll();  
+print('Active debouncers: ${EasyDebounce.count()}');  
+EasyDebounce.fire('my-debouncer');  
+
+https://pub.dev/packages/easy_debounce  
