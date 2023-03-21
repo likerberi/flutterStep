@@ -1,4 +1,4 @@
-when we make DB,  
+code_generator  
 copyWith  
 toString  
 toJson  
@@ -8,7 +8,8 @@ fromJson
 .....
 freezed is sort of AUTO_GENERATOR  
 pubspec -> freezed_annotation, build_runner and freezed.  
-_$CLASS()  
+_$CLASS()
+with factory keyword  
 part 'class.g.dart';  
 part 'class.freezed.dart';  
   
