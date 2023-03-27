@@ -1,0 +1,7 @@
+dart fix --apply  
+dart analyze  
+  
+linter:  
+	rules:  
+		- camel_case_types  
+		- use_super_parameters  
