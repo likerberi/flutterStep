@@ -1,4 +1,6 @@
 하위 위젯이 동일한 빌드 메서드로 상위 위젯의 빌드 컨텍스트에 접근하는 코드를 작성  
+~statelessWidget,  
+<->StatefulBuilder  
 
 기존 구형 flutter.io로 향하던 영상 묶음에서  
 신형(?) flutter.dev로 향하던 영상 묶음으로 변경.  
