@@ -2,3 +2,9 @@ Simple:: ChangeNotifier() ~ notifyListeners();
 setState({});  
 
 Complex:: libraries like BloC, riverpod etc..  
+
+Provider
+NotifierProvider
+StateNotifierProvider
+FutureProvider
+StreamProvider
