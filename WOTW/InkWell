@@ -1,0 +1,5 @@
+InkWell has an animation.  
+simpler than GestureDetector.  
+covering such as tertiary, third tap, long press  
+and scale, pan, (long)press  
+with cancel, down, end, moveUpdate, start, up.  
