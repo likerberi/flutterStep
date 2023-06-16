@@ -2,3 +2,4 @@ IntrinsicHeight, IntrinsicWidth
 costly widget  
 Row, Column의 하위 위젯의 끼리끼리를 맞출 때.  
 때론 무한/무제한 높이, 너비를 사용할 수 있어 이를 합리적으로 활용할 때.  
+최대한 사용하지 않는 걸 바람직하게 여기는 듯  
