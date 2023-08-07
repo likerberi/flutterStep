@@ -1,0 +1,11 @@
+draggable  
+ui patterns, animations.  
+   
+<type> with data, child, feedback(reaction)  
+and childWhenDragging(shadow)  
+  
+DragTarget :: landing zone,  
+onWillAccept  
+onAccept  
+onLeave  
+with builder()  
