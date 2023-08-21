@@ -1,0 +1,4 @@
+<-> animation controller  
+animate( effects: ~  
+Chaining with fade() tint() then() shake()   
+[Widget, Widget, Widget] + animate()  
