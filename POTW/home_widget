@@ -1,0 +1,10 @@
+for Home & Lock Screen  
+At a glance about Dataflow~updates  
+Not a rendered object or class in flutter,  
+But an indépendant small-app-view  
+Such as clock, timer, music selector and so on.   
+  
+HomeWidget.renderFlutterWidget(  
+Widget()  
+key:   
+logicalSize:  
