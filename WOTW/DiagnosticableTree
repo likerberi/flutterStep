@@ -1,0 +1,2 @@
+A base class for providing string and DiagnosticsNode debug representations describing the properties and children of an object.  
+  Object > Diagnosticable Tree > Widget > RenderObjectWidget   
