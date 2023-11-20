@@ -1,0 +1,7 @@
+Firebase crashlytics  
+에러들을 그룹화하고 영향 크기를 순서화 / 분석   
+안정성에 변화가 있을 때 마다 경고.   
+  
+파이어베이스 설정 밑에 추가  
+FlutterError.onError / recordFlutterFatalError  
+PlatformDispatch.instance.onError / recordError  
