@@ -1,0 +1,3 @@
+throws all errors or returns null  
+ErrorWidget,  
+FlutterError.onError  
