@@ -1,0 +1,14 @@
+a code generator tool to make communication between Flutter and the host platform type-safe, easier, and faster  
+Currently pigeon supports generating:  
+  
+Kotlin and Java code for Android  
+Swift and Objective-C code for iOS and macOS  
+C++ code for Windows  
+
+Add pigeon as a dev_dependency  
+@HostApi  
+@FlutterApi  
+
+kotlinOut:  
+  'android/app/src/main/kotlin/dev/flutter/pigeon_example_app/Messages.g.kt',  
+kotlinOptions: KotlinOptions(),  
