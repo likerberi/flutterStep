@@ -1,0 +1,11 @@
+Appcast({  
+    http.Client? client,  
+    UpgraderOS? upgraderOS,  
+    UpgraderDevice? upgraderDevice,  
+  })  : client = client ?? http.Client(),  
+        upgraderOS = upgraderOS ?? UpgraderOS(),  
+        upgraderDevice = upgraderDevice ?? UpgraderDevice();  
+
+when use upgrader pkg,  
+download app details from an appcast  
+(.xml)  
