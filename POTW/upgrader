@@ -1,0 +1,4 @@
+Newer app version available, alert with card or prompt-dialog  
+UpgradeAlert widget with upgrader  
+With goRouter, navigatorKey needed  
+(Ex. routerConfig.routerDelegate.navigatorKey)  
