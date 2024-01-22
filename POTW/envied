@@ -1,0 +1,16 @@
+A better and probably safer way to handle environment variables in Flutter  
+deprecated Envify => Envied  
+
+import 'package:envied/envied.dart';  
+  
+part 'env.g.dart';  
+  
+@Envied()  
+abstract class Env {  
+    @EnviedField(varName: 'KEY')  
+    static const key = _Env.key;  
+}  
+with envied_generator  
+with build_runner  
+
+obfuscate makes safer, but not perfect  
