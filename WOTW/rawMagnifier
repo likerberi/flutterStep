@@ -1,0 +1,5 @@
+the functionality to magnify a specific part of the screen  
+RawMagnifier()  
+GestureDetector - WidgetToMagnifier  
+Positioned  
+magnificationScale  
