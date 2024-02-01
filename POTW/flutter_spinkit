@@ -1,0 +1,14 @@
+collection of loading indicators animated with flutter  
+const spinkit = SpinKitRotatingCircle(  
+  color: Colors.white,  
+  size: 50.0,  
+);  
+final spinkit = SpinKitFadingCircle(  
+  itemBuilder: (BuildContext context, int index) {  
+    return DecoratedBox(  
+      decoration: BoxDecoration(  
+        color: index.isEven ? Colors.red : Colors.green,  
+      ),  
+    );  
+  },  
+);  
