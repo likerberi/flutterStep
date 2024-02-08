@@ -1,0 +1,4 @@
+Dio  
+CRUD(get, post, delete, put, patch..)  
+FormData  
+Interceptors with req, res and err  
