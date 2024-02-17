@@ -1,0 +1,6 @@
+inheritedModel  
+The same as an inherited ‘/‘ Widget  
+With aspect: ‘one’,  
+With updateShouldNotifyDependent  
+True: rebuild(when needs it only)  
+False: restore  
