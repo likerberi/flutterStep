@@ -1,6 +1,16 @@
-Navi,  
-deepLink,  
-and info like  
-builder: (context, state) => YourClass(params: state.params[‘’paramId]);  
+It can be unstable or incompatible  
+Major releases every two months, on average  
   
-shellRoute for part(like bottomNavi)  
+return MaterialApp.router(  
+      routerConfig: _router,  
+);  
+  
+final _router = GoRouter(  
+  routes: [  
+    GoRoute(  
+      path: '/',  
+      builder: (context, state) => HomeScreen(),  
+    ),  
+  ],  
+);  
+  
