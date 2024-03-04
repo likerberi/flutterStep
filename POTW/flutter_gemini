@@ -1,0 +1,6 @@
+Gemini with Flutter, default is Gemini Pro(medium)  
+(Gemini nano is basically on an Android(Pixel 8 pro))  
+Gemini API has supports such as Python, Go, NodeJS, Dart, Swift and Android  
+Text gen by text-input,  
+Text gen from text and images  
+Chatting and streaming.  
