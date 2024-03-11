@@ -1,0 +1,3 @@
+to reference widgets within the widget tree.  
+With GlobalKey, BuildContext, and should be disposed  
+Alternative: StateProvider, ChangeNotifier  
