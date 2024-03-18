@@ -2,3 +2,12 @@ https://pub.dev/packages/logger
 Much more visible   
 https://pub.dev/packages/logging  
 forcible  
+Logger.root.level = Level.ALL; // defaults to Level.INFO  
+Logger.root.onRecord.listen((record) {  
+  print('${record.level.name}: ${record.time}: ${record.message}');  
+});  
+OFF, SEVERE, WARNING  
+var future = doSomethingAsync().then((result) {  
+  log.fine('Got the result: $result');  
+  processResult(result);  
+}).catchError((e, stackTrace) => log.severe('Oh noes!', e, stackTrace));  
