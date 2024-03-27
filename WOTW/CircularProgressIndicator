@@ -1,0 +1,12 @@
+default is default..  
+key, value, bgColor, color, valueColor,  
+strokeWidth, strokeAlign, strokeAlignCenter,  
+semanticsLabel, semanticsValue, strokeCap  
+
+CircularProgressIndicator(  
+  value: progress, // controller.value  
+  strokeWidth: strokeWidth,   
+  valueColor: AlwaysStoppedAnimation<Color>(backgroundColor),  
+  backgroundColor: foregroundColor,  
+),  
+
