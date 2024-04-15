@@ -1,3 +1,4 @@
 RepaintBoundary   
-making a guideline for rendering.  
+making a guideline for rendering. 
+debugRepaintRainbowEnable = true;
 resource mgnt needed.  
