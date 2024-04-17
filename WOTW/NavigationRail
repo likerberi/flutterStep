@@ -1,8 +1,12 @@
-네비게이션 레일  
-  
-바텀네비게이션바 for app  
-=> 웹? 태블릿?   
-사이드 네비게이션.  
-테스티네이션 설정  
-라벨/ 리딩/ 트레일링 설정  
+navigationRail(  
+  destinations: <NavigationRailDestination> []  
+Icon, selectedICon,   
+selectedIndex  
+changeDestination()  
+labelType and TextStyle  
+Elevation  
+useIndicator  
+With media query,   
+Compare to bottonNavigationBar  
+라벨/ 리딩/ 트레일링 설정    
   
