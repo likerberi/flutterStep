@@ -1,0 +1,4 @@
+Version-control  
+Pre-release versions are excluded from most max ranges.  
+Pre-release versions are avoided when possible.  
+the only way to ensure compatibility when depending on a pre-1.0.0 package is to pin the dependency to an exact version.  
