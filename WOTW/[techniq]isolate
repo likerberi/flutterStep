@@ -1,0 +1,8 @@
+Dart and flutter, basically single thread : when hard time?  
+Await Isolate.run(()=> myComputation);  
+:: parallelism   
+   
+Async.  
+Not automatic multi thread : most of time, light  
+Async simply makes a note to return to the blocking code  
+a *callback*.. for when the code is ready  
