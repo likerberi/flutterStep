@@ -3,4 +3,8 @@
 그리고 나머지가 Flex 위젯들 (Expanded, Flexible)
 안드로이드의 weight처럼 flex를 조절할 수 있음. 
 
-플렉서블과의 차이점은, 플렉서블은 parent가 기준. 
+플렉서블과의 차이점은, 플렉서블은 parent가 기준.  
+child가 parent를 넘치지 않으면 영향을 받지 않음.  
+
+reactive  
+
