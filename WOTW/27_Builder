@@ -2,5 +2,6 @@
 ~statelessWidget,  
 <->StatefulBuilder  
 
-기존 구형 flutter.io로 향하던 영상 묶음에서  
-신형(?) flutter.dev로 향하던 영상 묶음으로 변경.  
+Builder 위젯 자체는 실제 위젯을 만들지 않습니다. 대신, 위젯 트리의 현재 컨텍스트에 대한 접근 권한을 제공  
+.builder 매개 변수는 다양한 위젯에서 사용되는 일반적인 매개 변수  
+조건에 따라 동적으로 위젯을 생성하는 데 사용할 수 있  
