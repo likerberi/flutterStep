@@ -1,0 +1,5 @@
+RFW  
+is a Flutter package that enables you to dynamically create and add widgets to your app at runtime  
+RFW defines widgets in declarative files like JSON or YAML  
+Dynamic and separation with reusability and remote updates  
+A/B testing, personalize and content mgmt.   
