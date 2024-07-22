@@ -1,0 +1,5 @@
+Technique  
+Await future.wait    
+Multiple futures, ([])  
+Serial or at the same time.   
+Set by the slowest future  
