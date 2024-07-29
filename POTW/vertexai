@@ -1,0 +1,10 @@
+Gemini API - AI!  
+With firebase_core,  
+Model name: gemini(3.5, pro. Etc)  
+GenerateModel / GenerationConfig  
+Former google_generative_ai  
+No apiKey right now.   
+Prompt = []  
+Final res = await model.()  
+With appchk for malicious usage   
+Text,  image, video, Audio, pdf etc  
