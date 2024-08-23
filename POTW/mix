@@ -1,0 +1,8 @@
+Mix : 스타일 규칙을 매개변수로?   
+StyledText/Icon/Image  
+Variant  
+Flex/V/ZBox  
+class CustomButtonType extends Variant  
+static const primary = CustomButtonType._('custom.button.primary');  
+class CustomButtonSize extends Variant  
+static const medium = CustomButtonSize._('custom.button.medium');  
