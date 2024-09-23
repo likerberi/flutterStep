@@ -1,0 +1,2 @@
+Avoid data update [] from the UI layer  
+UI가 데이터 변경하는 것을 막음.(const)  
