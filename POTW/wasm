@@ -1,0 +1,7 @@
+WebAssembly (Wasm) is a low-level programming language that enables Dart and Flutter to render high-performance web applications. Key features include:
+  
+    Supported from Flutter 3.22, requiring Dart 3.4 or higher.  
+    Build command: flutter build web --wasm  
+    Performance improvements of 2-3 times.  
+    Currently in beta, so it may not be supported on all platforms.  
+  
