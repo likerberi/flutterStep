@@ -1,0 +1,24 @@
+Widget, Element, RenderObject의 관계  
+    Widget: UI의 설계도 역할을 합니다. 불변(immutable)하며 구성 정보만을 포함합니다  
+    Element: Widget의 인스턴스화된 형태로, 트리 내 특정 위치에 Widget을 배치합니다  
+    RenderObject: 실제 화면에 UI를 그리는 역할을 담당합니다  
+  
+Element의 특징
+    Widget과 RenderObject 사이의 중개자 역할을 합니다  
+    StatefulWidget의 경우 State 객체를 보유합니다  
+    트리 구조에서 위치 정보를 가집니다  
+
+RenderObject의 특징  
+    UI 요소의 크기, 레이아웃, 그리기 로직을 제어합니다  
+    Element에 연결되어 있으며, Element가 재사용될 때 RenderObject도 함께 재사용됩니다  
+    실제 화면 렌더링을 담당하는 핵심 객체입니다  
+
+렌더링 프로세스  
+    Widget 트리가 생성됩니다.  
+    각 Widget에 대해 Element가 생성되어 Element 트리를 형성합니다.  
+    Element는 RenderObject를 생성하고, 이들이 모여 RenderObject 트리를 구성합니다  
+
+최적화 메커니즘  
+    Flutter는 프레임 빌드 시 Element 트리를 순회하며 재사용 가능한 Element를 찾습니다  
+    Widget의 타입과 키가 동일하면 Element를 재사용하고, 그렇지 않으면 새로운 Element와 RenderObject를 생성합니다  
+by. P
