@@ -1,0 +1,4 @@
+chk Bg/appBar/playable  
+instance()-> Uri.parse()->Init.then()  
+AspectRatio with controller.value.aspectRatio  
+Dispose.   
