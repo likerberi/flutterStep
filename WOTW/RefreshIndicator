@@ -1,0 +1,5 @@
+refresh a list  
+With onRefresh: (){} ~ Future<void>   
+bgColor - spinner  
+displacement: where the spinner is   
+edgeOffset   
