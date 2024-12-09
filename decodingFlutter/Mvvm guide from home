@@ -1,0 +1,5 @@
+UI layer: view, view model  
+(Logic layer: useCase)  
+Data layer: Repository, services  
+  
+https://docs.flutter.dev/app-architecture/guide  
