@@ -8,3 +8,5 @@ flutter run -d chrome
 </script>  
   
 flutter_web_plugins/url_strategy  
+HtmlElementView  
+addView  
