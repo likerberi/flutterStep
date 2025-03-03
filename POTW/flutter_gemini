@@ -4,3 +4,7 @@ Gemini API has supports such as Python, Go, NodeJS, Dart, Swift and Android
 Text gen by text-input,  
 Text gen from text and images  
 Chatting and streaming.  
+
+in pkg,
+Api keys / prompt / tokens / models / embeddings   
+safety chks and gen configurations  
