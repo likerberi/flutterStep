@@ -1,0 +1,7 @@
+Banner ~ CheckBannerMode with DEBUG and MaterialApp   
+MetaData ~ RenderMetaData  
+RepaintBoundary ~ widget tree ~ re-render  
+IntrinsicHeight ~ the tallest child  
+IntrinsicWidth ~ Row   
+  
+https://medium.com/dcm-analyzer/10-flutter-widgets-probably-havent-heard-of-but-should-be-using-8604b4935e00  
