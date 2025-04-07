@@ -1,0 +1,6 @@
+CQS : return <-> state change  
+육각형 아키텍처(Hexagonal Architecture)는 비즈니스 로직을 외부 의존성으로부터 보호하는 아키텍처 패턴입니다. 2005년 앨리스테어 코어번이 정의했으며 "Port And Adapter Pattern"이라고도 불립니다  
+인바운드 포트: 외부에서 내부 영역을 사용하기 위한 API  
+아웃바운드 포트: 내부에서 외부 영역을 사용하기 위한 API  
+Primary(Driving) Adapter: 애플리케이션을 동작시키는 역할(UI 등)  
+Secondary(Driven) Adapter: 애플리케이션에 의해 동작되는 역할(인프라 등)  
