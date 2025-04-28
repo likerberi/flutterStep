@@ -1,0 +1,12 @@
+Cupertino
+Sliding
+Segmented
+Control
+  
+segmentsMap = < "T" ,Widget> {  
+	: HappyEmojiWidget(),  
+	: SadEmojiWidget(),  
+	: ShockedEmojiWidget()  
+}  
+‘Order’  
+onValueChanged  
