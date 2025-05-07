@@ -1,0 +1,4 @@
+Flutter는 선언적(declarative) 멀티플랫폼 UI 프레임워크로, Dart 언어로 작성됨  
+Flutter 아키텍처는 세 가지 주요 레이어(Framework, Engine, Embedder)로 구성되어 있고, 위젯 기반의 빌드 메서드를 통해 UI를 선언적으로 구성함  
+각 프로젝트는 네이티브 프로젝트, Flutter 프레임워크(Dart 코드), 플랫폼별 glue code로 이뤄짐  
+Flutter의 레이어드 구조(‘layered cake’)와 Dart의 역할, 그리고 다양한 플랫폼 지원이 핵심 특징임  
