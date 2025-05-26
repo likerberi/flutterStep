@@ -1,0 +1,4 @@
+D.F. 2  
+Widget - provide declarative API  
+Immutable, disposable   
+Stl, stf, RenderObjectWidget, InheritedWidget extends widget  
