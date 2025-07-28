@@ -1,0 +1,14 @@
+# iOS 빌드 시스템 심화 가이드 (with. Flutter)  
+  
+- **주제 요약**: Flutter 기반 iOS 앱의 빌드 환경/설정 및 외부 서비스(CI·CD 등) 연동 핵심 실무 가이드  
+  
+## 주요 내용  
+- Xcode, Flutter SDK, CocoaPods 등 필수 개발 환경 준비 및 점검  
+- 개발/배포 분리(Scheme, Configuration, Info.plist 등) 설정 방법  
+- 앱 서명(Signing), 번들 ID, 배포 타깃 등 프로젝트 빌드 필수 설정  
+- 여러 환경(Flavor)로 빌드 시, Scheme 및 Configuration 관리 필요  
+- 외부 서비스 연동: 패키지 의존성(pubspec.yaml), 네이티브 SDK(Xcode Pods/Framework), CI/CD(Codemagic 등)  
+- App Store 배포를 위한 빌드, 서명, 제출 과정 요약  
+  
+## 참고 링크  
+- 원문: https://curogom.tistory.com/4  
