@@ -1,0 +1,25 @@
+Future<void> callingFunction(  
+    HttpsCallable callable,  
+    BuildContext context,  
+  ) async {  
+    try {  
+      final result = await callable();  
+      setState(() {  
+        fruit.clear();  
+        streamResult.clear();  
+        result.data.forEach((f) {  
+          fruit.add(f);  
+        });  
+      });  
+    } catch (e) {  
+      ScaffoldMessenger.of(context).showSnackBar(  
+        SnackBar(  
+          content: Text('ERROR: $e'),  
+        ),  
+      );  
+    }  
+  }  
+}  
+
+with cost upgrade  
+or can use Vercel  
