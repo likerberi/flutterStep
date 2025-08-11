@@ -1,0 +1,3 @@
+Firebase Hosting vs Supabase
+Firebase Hosting: 정적 파일(HTML/CSS/JS) 또는 Functions(서버리스) 배포를 CLI 한 번(firebase deploy)으로 제공. 자체 Node 서버를 지속적으로 띄우는 형태는 아님 (Functions는 이벤트 기반).  
+Supabase: Postgres + Auth + Storage + Edge Functions(경량 Deno) 제공. “일반 Node.js Express 서버”를 계속 돌려주는 호스팅은 포함 안 함. 그래서 앱(Express)은 다른 플랫폼에 올리고, Supabase는 백엔드 서비스로만 사용.  
