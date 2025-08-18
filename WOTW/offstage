@@ -1,0 +1,10 @@
+Offstage(  
+  offstage: true/false // visibility  
+  child:~  
+)  
+
+When offstage property is set to true, the child is hidden (not painted and takes no layout space).  
+  
+The child still remains active: it can receive focus and continue animations.  
+  
+It is useful for cases where you want to keep the widget alive, maintain its state, or measure it, but hide it from the UI.  
