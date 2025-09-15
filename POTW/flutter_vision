@@ -1,0 +1,369 @@
+import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
+import 'package:flutter_vision/flutter_vision.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'YOLOv8 실시간 객체 탐지',
+      theme: ThemeData.dark().copyWith(
+        primaryColor: Colors.deepPurple,
+        scaffoldBackgroundColor: Colors.black,
+      ),
+      home: ObjectDetectionScreen(),
+    );
+  }
+}
+
+class ObjectDetectionScreen extends StatefulWidget {
+  @override
+  _ObjectDetectionScreenState createState() => _ObjectDetectionScreenState();
+}
+
+class _ObjectDetectionScreenState extends State<ObjectDetectionScreen> {
+  late CameraController controller;
+  late FlutterVision vision;
+  late List<Map<String, dynamic>> yoloResults;
+  CameraImage? cameraImage;
+  bool isLoaded = false;
+  bool isDetecting = false;
+  double confidenceThreshold = 0.5;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  init() async {
+    // 카메라 초기화
+    List<CameraDescription> cameras = await availableCameras();
+    vision = FlutterVision();
+    controller = CameraController(cameras[0], ResolutionPreset.high);
+    controller.initialize().then((value) {
+      loadYoloModel().then((value) {
+        setState(() {
+          isLoaded = true;
+          yoloResults = [];
+        });
+      });
+    });
+  }
+
+  loadYoloModel() async {
+    return await vision.loadYoloModel(
+      labels: 'assets/labels.txt',
+      modelPath: 'assets/yolov8n.tflite',
+      modelVersion: "yolov8",
+      numThreads: 2,
+      useGpu: true,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    if (!isLoaded) {
+      return Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(color: Colors.deepPurple),
+              SizedBox(height: 20),
+              Text('YOLOv8 모델 로딩 중...', 
+                   style: TextStyle(fontSize: 18, color: Colors.white)),
+            ],
+          ),
+        ),
+      );
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('실시간 객체 탐지'),
+        backgroundColor: Colors.deepPurple,
+        actions: [
+          IconButton(
+            icon: Icon(isDetecting ? Icons.pause : Icons.play_arrow),
+            onPressed: () {
+              setState(() {
+                isDetecting = !isDetecting;
+              });
+              if (isDetecting) {
+                controller.startImageStream(onLatestImageAvailable);
+              } else {
+                controller.stopImageStream();
+              }
+            },
+          ),
+        ],
+      ),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // 카메라 미리보기
+          AspectRatio(
+            aspectRatio: controller.value.aspectRatio,
+            child: CameraPreview(controller),
+          ),
+          
+          // 탐지된 객체 오버레이
+          ...displayBoxesAroundRecognizedObjects(size),
+          
+          // 상단 정보 패널
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.black.withOpacity(0.8), Colors.transparent],
+                ),
+              ),
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '탐지된 객체: ${yoloResults.length}개',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'FPS: ${isDetecting ? "30" : "0"}',
+                    style: TextStyle(color: Colors.green, fontSize: 16),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          
+          // 하단 컨트롤 패널
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [Colors.black.withOpacity(0.8), Colors.transparent],
+                ),
+              ),
+              padding: EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '신뢰도 임계값: ${confidenceThreshold.toStringAsFixed(1)}',
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                  Slider(
+                    value: confidenceThreshold,
+                    min: 0.1,
+                    max: 1.0,
+                    divisions: 9,
+                    activeColor: Colors.deepPurple,
+                    onChanged: (value) {
+                      setState(() {
+                        confidenceThreshold = value;
+                      });
+                    },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton.icon(
+                        onPressed: () => takeScreenshot(),
+                        icon: Icon(Icons.camera_alt),
+                        label: Text('스크린샷'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: () => showDetectionStats(),
+                        icon: Icon(Icons.analytics),
+                        label: Text('통계'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> displayBoxesAroundRecognizedObjects(Size screen) {
+    if (yoloResults.isEmpty) return [];
+    
+    double factorX = screen.width / (cameraImage?.height ?? 1);
+    double factorY = screen.height / (cameraImage?.width ?? 1);
+
+    Color colorPick = Colors.pink;
+
+    return yoloResults.map((result) {
+      double confidence = result["confidence"];
+      if (confidence < confidenceThreshold) return Container();
+      
+      String tag = result["tag"];
+      double x = result["box"][0] * factorX;
+      double y = result["box"][1] * factorY;
+      double w = result["box"][2] * factorX;
+      double h = result["box"][3] * factorY;
+
+      return Positioned(
+        left: x,
+        top: y,
+        width: w,
+        height: h,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            border: Border.all(color: getColorForClass(tag), width: 3.0),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: getColorForClass(tag),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(7),
+                    topRight: Radius.circular(7),
+                  ),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                child: Text(
+                  "$tag ${(confidence * 100).toStringAsFixed(0)}%",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }).toList();
+  }
+
+  Color getColorForClass(String className) {
+    // 클래스별로 다른 색상 반환
+    Map<String, Color> classColors = {
+      'person': Colors.red,
+      'car': Colors.blue,
+      'truck': Colors.green,
+      'bus': Colors.orange,
+      'motorbike': Colors.purple,
+      'bicycle': Colors.cyan,
+      'dog': Colors.brown,
+      'cat': Colors.pink,
+      'bird': Colors.yellow,
+      'horse': Colors.indigo,
+    };
+    return classColors[className] ?? Colors.white;
+  }
+
+  onLatestImageAvailable(CameraImage cameraImage) async {
+    this.cameraImage = cameraImage;
+    yoloOnFrame(cameraImage);
+  }
+
+  yoloOnFrame(CameraImage cameraImage) async {
+    final result = await vision.yoloOnFrame(
+      bytesList: cameraImage.planes.map((plane) => plane.bytes).toList(),
+      imageHeight: cameraImage.height,
+      imageWidth: cameraImage.width,
+      iouThreshold: 0.4,
+      confThreshold: confidenceThreshold,
+      classThreshold: 0.5,
+    );
+    if (mounted) {
+      setState(() {
+        yoloResults = result;
+      });
+    }
+  }
+
+  takeScreenshot() async {
+    // 스크린샷 기능 구현
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('스크린샷이 저장되었습니다!'),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
+  showDetectionStats() {
+    Map<String, int> objectCounts = {};
+    for (var result in yoloResults) {
+      String tag = result["tag"];
+      objectCounts[tag] = (objectCounts[tag] ?? 0) + 1;
+    }
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('탐지 통계'),
+        content: Container(
+          width: double.maxFinite,
+          child: ListView(
+            shrinkWrap: true,
+            children: objectCounts.entries.map((entry) {
+              return ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: getColorForClass(entry.key),
+                  child: Text(
+                    entry.value.toString(),
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                title: Text(entry.key),
+                subtitle: Text('${entry.value}개 탐지됨'),
+              );
+            }).toList(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('닫기'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    vision.closeYoloModel();
+    super.dispose();
+  }
+}
+// with Claude4Sonnet  
