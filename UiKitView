@@ -1,0 +1,8 @@
+return UiKitView(  
+      viewType: viewType,  
+      layoutDirection: TextDirection.ltr,  
+      creationParams: creationParams,  
+      creationParamsCodec: const StandardMessageCodec(),  
+);  
+expensive  
+strategically  
