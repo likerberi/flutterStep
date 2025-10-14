@@ -1,0 +1,6 @@
+To get started, install the extension with the following command:  
+gemini extensions install https://github.com/gemini-cli-extensions/flutter  
+The Flutter Extension for Gemini CLI comes with a set of commands to help you with critical stages of development. Here are a few of the most common commands and how to use them:
+/create-app: Creates a design doc and implementation plan for Gemini to follow.  
+/modify: Creates a plan to make large changes to the app.  
+/commit: Analyzes and tests the code, fixes any issues that were found, and then commits the change to Git.  
