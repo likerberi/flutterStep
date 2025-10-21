@@ -1,0 +1,4 @@
+In Flutter, thread merge will be adopted soon by Google.  
+Before, split between Dart UI T and Native Platform T is necessary for Flutter since the heavy process would shut down whole program.  
+But it will be merged in aspect that light one = merged, heavy one = isolated.   
+catched and supported by Gemini and Curogom
