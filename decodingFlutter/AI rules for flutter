@@ -1,0 +1,26 @@
+Copilot powered IDEs	copilot-instructions.md	Configure .github/copilot-instructions.md  
+Cursor	cursor.md	Configure cursorrules.md  
+Firebase Studio	airules.md	Configure airules.md  
+Gemini CLI	GEMINI.md	Configure GEMINI.md  
+JetBrains IDEs	guidelines.md	Configure guidelines.md  
+VS Code	.instructions.md	Configure .instructions.md  
+Windsurf	guidelines.md	Configure guidelines.md  
+By agent, sector and function etc…   
+In Flutter,   
+## Flutter style guide  
+* **SOLID Principles:** Apply SOLID principles throughout the codebase.  
+* **Concise and Declarative:** Write concise, modern, technical Dart code.  
+  Prefer functional and declarative patterns.  
+* **Composition over Inheritance:** Favor composition for building complex  
+  widgets and logic.   
+* **Immutability:** Prefer immutable data structures. Widgets (especially  
+  `StatelessWidget`) should be immutable.  
+* **State Management:** Separate ephemeral state and app state. Use a state  
+  management solution for app state to handle the separation of concerns.  
+* **Widgets are for UI:** Everything in Flutter's UI is a widget. Compose  
+  complex UIs from smaller, reusable widgets.  
+* **Navigation:** Use a modern routing package like `auto_route` or `go_router`.  
+  See the [navigation guide](./navigation.md) for a detailed example using  
+  `go_router`.  
+
+inspired by HDD and google (flutter.dev)  
