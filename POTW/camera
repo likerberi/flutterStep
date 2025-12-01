@@ -1,0 +1,7 @@
+Camera  
+AvailableCameras();  
+Two or more cameras  
+cameras[]  
+ResolutionPreset  
+controller.init  
+XFile imagefile  
