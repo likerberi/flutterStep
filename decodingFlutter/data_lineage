@@ -1,0 +1,76 @@
+앞서 정리한 가이드라인(Why, What, How)을 바탕으로, 실제 시스템을 구축하기 위한 **논리적 아키텍처(Logical Architecture)**와 핵심 데이터 모델링 전략으로 내용을 심화하여 진행하겠습니다.
+
+이 단계는 기획자와 아키텍트가 개발 착수 전에 합의해야 하는 "청사진(Blueprint)" 단계입니다.
+1. 시스템 논리 아키텍처 (Logical Architecture)
+
+시스템을 크게 4개의 계층으로 나누어 설계합니다. 핵심은 "Rule 기반 파싱"과 "AI 기반 추론"의 하이브리드 운영입니다.
+Layer 1: Data Observation (관측 계층)
+
+로그가 발생하는 원천입니다. 단순히 가져오는 게 아니라 '어떤 로그를 가져올지' 필터링 정책이 중요합니다.
+
+    Query Logs: Snowflake, BigQuery, Oracle 등의 실행된 SQL 이력.
+
+    Orchestration Logs: Airflow, Dagster의 Task 실행 시작/종료 시간 및 상태.
+
+    Manifests: dbt 모델 정의 파일이나 k8s yaml 파일 (정적 분석 보완용).
+
+Layer 2: Interpretation Engine (해석 계층 - 핵심)
+
+수집된 로그를 정제된 메타데이터로 변환하는 두뇌입니다.
+
+    A. Rule-based Parser (1차 처리):
+
+        SQLGlot 등을 이용해 표준 SQL 문법을 빠르게 처리.
+
+        비용이 0에 가깝고 속도가 빠름. (전체 로그의 약 70~80% 처리)
+
+    B. AI Inference Agent (2차 처리):
+
+        Parser가 실패한 로그(복잡한 프로시저, 비표준 쿼리, 에러 로그)를 넘겨받음.
+
+        LLM을 통해 *"입력 테이블, 출력 테이블, 수행된 연산(Transformation)"*을 JSON 형태로 추출.
+
+        Prompt 예시: "다음 로그에서 Source Table과 Target Table을 식별하고, 어떤 컬럼이 Join key로 쓰였는지 추출해."
+
+Layer 3: Semantic Graph Store (저장 계층)
+
+분석된 결과를 그래프(Graph) 형태로 저장합니다. 관계형 DB(RDBMS)는 계층 구조를 표현하기에 비효율적(재귀 쿼리 등)이므로 피합니다.
+
+    기술 스택: Neo4j, Amazon Neptune, 또는 RDBMS 위의 Apache AGE.
+
+    역할: 노드 간의 최단 경로 탐색(영향도 분석), 순환 참조 감지.
+
+Layer 4: Consumption Layer (활용 계층)
+
+구축된 리니지를 사용하는 인터페이스입니다.
+
+    Lineage UI: 데이터 흐름 시각화 및 검색.
+
+    Bot/Alert: 상류(Upstream) 데이터 장애 시 하류(Downstream) 담당자에게 자동 슬랙 알림.
+
+2. 그래프 데이터 모델링 전략 (Graph Data Modeling)
+
+리니지의 품질은 **"무엇을 노드로, 무엇을 엣지로 정의하느냐"**에 달려 있습니다.
+A. Node (점: 자산)
+
+    Dataset: 테이블, 뷰, S3 파일, 카프카 토픽. (가장 기본 단위)
+
+    Job: 데이터를 이동시킨 행위 (예: Airflow Task ID, Query Hash).
+
+        Job 노드가 중요한 이유: 데이터가 저절로 이동하지 않습니다. 누가(Job) 옮겼는지 알아야 디버깅이 가능합니다.
+
+    User/Owner: 쿼리를 실행한 사람 혹은 테이블 소유자.
+
+B. Edge (선: 관계)
+
+단순 화살표가 아닌, 관계의 성격을 정의해야 합니다.
+
+    READS_FROM: Job이 Dataset을 읽음.
+
+    WRITES_TO: Job이 Dataset을 생성하거나 갱신함.
+
+    HAS_SCHEMA: Dataset이 특정 Column들을 가짐.
+      
+    DEPENDS_ON: (추론된 관계) 테이블 A가 없으면 테이블 B가 생성될 수 없음
+
+      by Gemini
