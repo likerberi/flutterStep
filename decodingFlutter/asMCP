@@ -1,0 +1,32 @@
+String getAppStateForAI(ProviderContainer container) {
+  // 앱의 실시간 상태(State)를 컨테이너에서 직접 읽어옵니다.
+  final currentTodos = container.read(todoProvider);
+  
+  // AI가 이해하기 쉬운 JSON 포맷으로 직렬화합니다.
+  final contextData = {
+    'app_context': 'Todo App Main Screen',
+    'timestamp': DateTime.now().toIso8601String(),
+    'active_tasks_count': currentTodos.where((t) => !t.isCompleted).length,
+    'tasks': currentTodos.map((t) => t.toJson()).toList(),
+  };
+
+  return jsonEncode(contextData);
+}
+
+void main() {
+  // 실제 앱 실행 환경 시뮬레이션
+  final container = ProviderContainer();
+  
+  // 1. 유저가 앱을 사용 중 (데이터 변경 발생)
+  final notifier = container.read(todoProvider.notifier);
+  notifier.add("MCP 프로토콜 공부하기");
+  notifier.add("플러터 앱 리팩토링");
+  notifier.toggle(container.read(todoProvider).first.id); // 첫 번째 할 일 완료 처리
+
+  // 2. LLM이 CLI를 통해 앱 상태를 요청했다고 가정
+  print("--- [AI Context Injection] ---");
+  print(getAppStateForAI(container)); 
+}
+
+//sample//  
+
