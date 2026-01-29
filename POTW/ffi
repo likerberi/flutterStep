@@ -1,0 +1,53 @@
+import 'dart:ffi' as ffi;
+import 'dart:isolate';
+import 'package:ffi/ffi.dart'; // 문자열 처리를 위해 필요
+
+// 1. FFI 시그니처 정의 (C 함수와 Dart 연결고리)
+typedef CConnectFunc = ffi.Int32 Function(ffi.Pointer<Utf8> ip, ffi.Int32 port);
+typedef DartConnectFunc = int Function(ffi.Pointer<Utf8> ip, int port);
+
+class SshService {
+  // 2. 메인 스레드에서 호출하는 함수
+  Future<void> connectToServer(String ip) async {
+    print("UI: 연결 시도 중... (화면은 계속 움직임)");
+    
+    // ReceivePort: Isolate로부터 결과를 받을 우체통
+    final receivePort = ReceivePort();
+    
+    // 3. 별도 스레드(Isolate) 생성 및 작업 지시
+    // 'spawn'은 새로운 일꾼을 만들고 _sshWorker 함수를 실행시킴
+    await Isolate.spawn(_sshWorker, [receivePort.sendPort, ip]);
+
+    // 결과 대기 (비동기)
+    final result = await receivePort.first;
+    
+    if (result == 0) {
+      print("UI: 연결 성공!");
+    } else {
+      print("UI: 연결 실패 (에러코드: $result)");
+    }
+  }
+
+  // 4. 백그라운드 스레드 (여기서 C 함수를 부름)
+  static void _sshWorker(List<dynamic> args) {
+    SendPort sendPort = args[0];
+    String ipStr = args[1];
+
+    // C 라이브러리 로드 (여기서 로드해야 함)
+    final dylib = ffi.DynamicLibrary.open("libssh2.so");
+    
+    // 함수 찾기
+    final connectFunc = dylib
+        .lookup<ffi.NativeFunction<CConnectFunc>>('connect_ssh_blocking')
+        .asFunction<DartConnectFunc>();
+
+    // ★ 여기서 10초가 걸려도 메인 UI는 멈추지 않음!
+    final ipPointer = ipStr.toNativeUtf8();
+    int resultCode = connectFunc(ipPointer, 22);
+    
+    calloc.free(ipPointer); // 메모리 해제 필수
+
+    // 결과만 메인 스레드로 전송
+    sendPort.send(resultCode);
+  }
+} Gemini generated  
