@@ -1,0 +1,96 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(home: HbimDashboard()));
+}
+
+// 1. [Data Structure] H-BIM의 핵심: 부재(Object) 정의
+// 기하학 정보(Geometry)와 속성 정보(Information)를 하나의 클래스로 묶습니다.
+class HeritageElement {
+  final String id;          // 고유 ID (GUID)
+  final String name;        // 부재명 (예: 대웅전 우측 기둥)
+  final String category;    // 분류 (공포, 기둥, 서까래...)
+  final String material;    // 재료 (육송, 느티나무...)
+  final String era;         // 시대 (조선 후기...)
+  
+  // 2. [Monitoring] 시계열 데이터 및 상태 정보
+  // 센서에서 받아온 실시간 데이터라고 가정합니다.
+  double moistureContent;   // 함수율 (%)
+  double displacement;      // 변위 (mm)
+  
+  HeritageElement({
+    required this.id,
+    required this.name,
+    required this.category,
+    required this.material,
+    required this.era,
+    this.moistureContent = 0.0,
+    this.displacement = 0.0,
+  });
+
+  // 3. [Logic] 위험도 자동 판별 (Risk Prediction)
+  // 단순 데이터 저장을 넘어, 상태를 스스로 진단하는 로직
+  bool get isDangerous => displacement > 5.0 || moistureContent > 20.0;
+}
+
+// 가상의 데이터베이스 (DB)
+final List<HeritageElement> bimDatabase = [
+  HeritageElement(
+    id: "COL-001",
+    name: "동측 1번 평주",
+    category: "기둥(Pillar)",
+    material: "소나무(Pine)",
+    era: "17세기",
+    moistureContent: 12.5,
+    displacement: 1.2, // 정상
+  ),
+  HeritageElement(
+    id: "GP-003",
+    name: "서측 3번 주심포",
+    category: "공포(Gongpo)",
+    material: "느티나무(Zelkova)",
+    era: "18세기",
+    moistureContent: 22.1, // 위험 (습기 과다)
+    displacement: 6.5,     // 위험 (처짐 발생)
+  ),
+];
+
+// UI: H-BIM 뷰어 (간소화됨)
+class HbimDashboard extends StatelessWidget {
+  const HbimDashboard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("H-BIM Monitoring System")),
+      body: ListView.builder(
+        itemCount: bimDatabase.length,
+        itemBuilder: (context, index) {
+          final element = bimDatabase[index];
+          
+          return Card(
+            // 위험한 부재는 빨간색 테두리로 시각화 (Digital Twin 시각화의 기초)
+            color: element.isDangerous ? Colors.red[50] : Colors.white,
+            child: ListTile(
+              leading: Icon(
+                Icons.account_balance, // 아이콘을 3D 모델 썸네일이라 가정
+                color: element.isDangerous ? Colors.red : Colors.green,
+              ),
+              title: Text("${element.name} (${element.category})"),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("재료: ${element.material} / 시대: ${element.era}"),
+                  Text("변위: ${element.displacement}mm / 함수율: ${element.moistureContent}%"),
+                ],
+              ),
+              trailing: element.isDangerous 
+                  ? const Text("⚠️ 점검 필요", style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)) 
+                  : const Text("정상", style: TextStyle(color: Colors.green)),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
