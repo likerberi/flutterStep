@@ -1,0 +1,105 @@
+// CAN 메시지 구조체 (표준)
+typedef struct {
+    uint32_t StdId;    // 메시지 ID (이름표, 예: 0x102)
+    uint32_t DLC;      // 데이터 길이 (0~8 바이트)
+    uint8_t  Data[8];  // 실제 보낼 내용
+} CAN_TxMsg_t;
+
+void Send_Device_Status(uint8_t batteryLevel, uint8_t errorStatus) {
+    CAN_TxHeaderTypeDef txHeader; // CAN 설정 헤더
+    uint8_t txData[8] = {0,};     // 보낼 데이터 배열
+    uint32_t txMailbox;           // 우체통
+
+    // 1. ID 설정 (중요도에 따라 미리 정해진 약속)
+    txHeader.StdId = 0x102;       // 예: 0x102는 '장치 상태'라고 약속함
+    txHeader.RTR = CAN_RTR_DATA;  // 데이터 프레임
+    txHeader.IDE = CAN_ID_STD;    // 표준 ID 사용
+    txHeader.DLC = 2;             // 데이터 2개만 보냄
+
+    // 2. 데이터 채우기
+    txData[0] = batteryLevel;     // 첫 번째 칸: 배터리
+    txData[1] = errorStatus;      // 두 번째 칸: 에러코드
+
+    // 3. 전송 (하드웨어 레지스터에 밀어 넣기)
+    if (HAL_CAN_AddTxMessage(&hcan1, &txHeader, txData, &txMailbox) != HAL_OK) {
+        // 전송 실패 시 에러 처리 (예: 재시도 로직)
+        ErrorHandler();
+    }
+}
+
+// 누군가 CAN 버스에 데이터를 쏘면, 하드웨어가 이 함수를 자동으로 호출함
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
+    CAN_RxHeaderTypeDef rxHeader;
+    uint8_t rxData[8];
+
+    // 메시지 꺼내오기
+    HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rxHeader, rxData);
+
+    // ID 확인: 내가 기다리던 메시지인가?
+    if (rxHeader.StdId == 0x500) { // 0x500: 'PC에서 온 진단 명령'이라고 가정
+        if (rxData[0] == 1) {
+            // LED를 켜라!
+            TurnOnLED();
+        }
+    }
+}
+
+// PC로부터 받은 데이터 패킷 구조체
+typedef struct {
+    uint8_t cmd;      // 명령어 (예: 0x01=진단, 0x02=업데이트)
+    uint32_t address; // 메모리 주소
+    uint32_t length;  // 데이터 길이
+    uint8_t data[64]; // 데이터 페이로드
+} USB_Packet_t;
+
+void StartUsbTask(void *argument) {
+    USB_Packet_t rxPacket;
+    
+    for(;;) {
+        // 1. USB로부터 데이터 수신 대기 (PC App 연동)
+        if (USB_Receive(&rxPacket, osWaitForever) == OK) {
+            
+            switch (rxPacket.cmd) {
+                case CMD_DIAGNOSTICS: 
+                    // 진단 기능: 현재 상태를 PC로 전송
+                    SendSystemStatusToPC(); 
+                    break;
+
+                case CMD_FW_UPDATE:
+                    // 업데이트 기능 개발: PC에서 받은 데이터를 외부 Flash에 기록
+                    // XSPI 인터페이스를 통해 고속 쓰기 수행
+                    XSPI_WriteData(rxPacket.address, rxPacket.data, rxPacket.length);
+                    
+                    // 무결성 검증 (CRC 등)
+                    if (VerifyFirmware(rxPacket.address, rxPacket.length)) {
+                        SendResponseToPC("Update Success");
+                        // 시스템 재부팅 및 부트로더 진입 로직 호출
+                    } else {
+                        SendResponseToPC("Update Failed");
+                    }
+                    break;
+            }
+        }
+        osDelay(10); // Context Switching 양보
+    }
+}
+
+void StartCanTask(void *argument) {
+    CAN_Message_t txMsg;
+    
+    for(;;) {
+        // 기존 구현된 기능 분석 및 포팅 영역
+        // 예: 센서 데이터를 읽어서 이상 유무 판단
+        uint8_t systemHealth = CheckSystemHealth(); 
+
+        // 품질 대응/신뢰성 테스트: 오류 발생 시 에러 코드 전송
+        txMsg.id = 0x100;
+        txMsg.len = 1;
+        txMsg.data[0] = systemHealth;
+        
+        // CAN 버스로 메시지 전송
+        HAL_CAN_AddTxMessage(&hcan1, &txHeader, txMsg.data, &txMailbox);
+        
+        osDelay(100); // 100ms 주기 전송
+    }
+} // with Gemini Pro  
